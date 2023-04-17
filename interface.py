@@ -72,10 +72,6 @@ def mouse_event(event):
     #2 - Middle button
     #3 - Right button
     finished = (not surface) and (len(np.array(line_dots))==2) and (dist_text.get()!='')
-    print(finished)
-    print(dots)
-    print(line_dots)
-    print(surface)
     if not finished:
         if surface:
             point_list = dots
