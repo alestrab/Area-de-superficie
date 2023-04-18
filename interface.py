@@ -135,7 +135,6 @@ def finish_area(length):
 
 def evaluate_area():
     l=lenght_ref_l.get()
-    #if (isinstance(l,(float))):
     try:
         l = float(l)
         n = l/float(lenght_pix_l.get())
