@@ -62,7 +62,7 @@ def mouse_event(event):
     #2 - Middle button
     #3 - Right button
     finished = (not surface) and (len(np.array(line_dots))==2) and (dist_text.get()!='')
-    if not finished:
+    if ((not finished)&(event.canvas.toolbar.mode=='')):
         if surface:
             point_list = dots
             color = '.r-'
@@ -102,12 +102,11 @@ def keyboard_event(event):
     #events:
     #c/C - Finish drawing 
     finished = (not surface) and (len(np.array(line_dots))==2)
-    
     key = event.key
     if ((key=='c')|(key=='C')):
         points = np.array(dots)
-        area_surface(points)
         if surface&(len(points)>2):
+            area_surface(points)
             surface=False
             plt.ion()
             for hance in plot_dots:
