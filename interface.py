@@ -52,16 +52,6 @@ def remove_point(list,x,y):
     except:
         exit('remove_point-Erro ao Retirar Ponto')      
         
-def area_surface(points):
-    vertices = PixCoord(x=points[:,0], y=points[:,1])
-    reg = PolygonPixelRegion(vertices=vertices)
-    reg.plot(facecolor='#FF0000', fill=True,zorder=2,
-                 label='Polygon')
-    new_text = str(np.round(reg.area,1))
-    area_text.set(new_text)
-    instructions_txt.configure(text='Selecione dois pontos indicando um comprimento conhecido.\n Pressione \'c\' para concluir.')
-
-
 def mouse_event(event):
     global dots
     global plot_dots
@@ -126,7 +116,16 @@ def keyboard_event(event):
         elif finished:
             finish_area(line_dots)
             
-            
+
+def area_surface(points):
+    vertices = PixCoord(x=points[:,0], y=points[:,1])
+    reg = PolygonPixelRegion(vertices=vertices)
+    reg.plot(facecolor='#FF0000', fill=True,zorder=2,
+                 label='Polygon')
+    new_text = str(np.round(reg.area,1))
+    area_text.set(new_text)
+    instructions_txt.configure(text='Selecione dois pontos indicando um comprimento conhecido.\n Pressione \'c\' para concluir.')
+
 def finish_area(length):
     dist=np.array(length)
     dist_pixel = np.linalg.norm(dist[1]-dist[0])
@@ -136,13 +135,14 @@ def finish_area(length):
 
 def evaluate_area():
     l=lenght_ref_l.get()
-    if (l.isdecimal()):
+    #if (isinstance(l,(float))):
+    try:
         l = float(l)
         n = l/float(lenght_pix_l.get())
         new_text = str(np.round(float(area_pix_l.get())*(n**2),1))
         area_surf_text.set(new_text)
         instructions_txt.configure(text='Área da Região Estimada.')
-    else:
+    except:
         new_text = '-'
         area_surf_text.set(new_text)
         lenght_u_t.current(0)
