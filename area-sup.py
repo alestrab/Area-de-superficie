@@ -91,7 +91,7 @@ def mouse_event(event):
             #Plot new points
             if len(points)>0:
                 plt.ion()
-                plot_dots = plt.plot(points[:,0],points[:,1],color,zorder=1)
+                plot_dots = plt.plot(points[:,0],points[:,1],color,zorder=3)
                 plt.ioff()
     
 def keyboard_event(event):
@@ -144,7 +144,8 @@ def evaluate_area():
         new_text = '-'
         area_surf_text.set(new_text)
         lenght_u_t.current(0)
-        instructions_txt.configure(text='Coloque o Comprimento do Segmento de Referência.')
+        if (lenght_pix_l.get()!=''):
+            instructions_txt.configure(text='Coloque o Comprimento do Segmento de Referência.')
     return True
 
    
